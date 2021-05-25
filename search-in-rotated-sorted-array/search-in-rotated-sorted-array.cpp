@@ -23,7 +23,6 @@ public:
         if (nums[lo] == target) {
             return lo;
         }
-        
         return -1;
     }
     
