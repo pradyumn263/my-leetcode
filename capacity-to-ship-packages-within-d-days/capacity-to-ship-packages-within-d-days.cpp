@@ -4,13 +4,11 @@ public:
         int res = 0;
         int currentCapacity = minWeight;
         
-        
         for (int i = 0; i < nums.size(); i++) {
             if (currentCapacity == 0) {
                 res++;
                 currentCapacity = minWeight;
             }
-            
             if (currentCapacity >= nums[i]) {
                 currentCapacity -= nums[i];
             } else {
