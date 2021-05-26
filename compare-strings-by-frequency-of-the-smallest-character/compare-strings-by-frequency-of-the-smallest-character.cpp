@@ -2,21 +2,24 @@ class Solution {
 public:
     
     int f(string &s) {
-        if(s.size() == 0) {
+       int size = s.size();
+        if (size == 0)
             return 0;
-        }
-        if (s.size() == 1)
+        
+        if (size == 1) 
             return 1;
         
-        sort(s.begin(), s.end());
-        int res = 1;
-        for (int i = 1; i < s.size(); i++) {
-            if (s[i-1] == s[i])
-                res++;
-            else 
-                break;
+        vector<int> freq(26, 0);
+        
+        for (int i = 0; i < s.size(); i++) {
+            freq[s[i] - 'a']++;
         }
-        return res;
+        
+        for (int i = 0; i < 26; i++) {
+            if(freq[i] != 0)
+                return freq[i];
+        }
+        return 0;
     }
     
     vector<int> numSmallerByFrequency(vector<string>& queries, vector<string>& words) {
