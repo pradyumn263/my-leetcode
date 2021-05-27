@@ -9,27 +9,15 @@ public:
         long long int currProduct = 1;
         int res = 0;
         
-        while (hi < size) {
-            if (currProduct * nums[hi] < k) {
-                currProduct*= nums[hi];
-                hi++;
-                
-                res += (hi - lo);
-            } else {
-                break;
-            }
-        }
-        
-        while (hi < size) {
-            currProduct*= nums[hi];
-            hi++;
-            
-            while(currProduct >= k && lo < hi) {
+        for (hi = 0; hi < nums.size(); hi++) {
+            currProduct *= nums[hi];
+            while(lo <= hi && currProduct >= k) {
                 currProduct /= nums[lo];
                 lo++;
             }
-            
-            res += (hi - lo);
+            if (currProduct < k) {
+                res += (hi - lo + 1);
+            }
         }
         
         return res;
