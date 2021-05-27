@@ -48,11 +48,9 @@ public:
             freq[s[hi]-'A']++;
             hi++;
             while (lo < size && lo < hi && getMaxCharCount(freq) < hi - lo - k) {
-               
                 freq[s[lo]-'A']--;
                 lo++;
             }
-            
             res = max(res, hi - lo);
         }
     
@@ -62,9 +60,6 @@ public:
         }
         
         res = max(res, hi - lo);
-        
         return res;
-        
-    
     }
 };
