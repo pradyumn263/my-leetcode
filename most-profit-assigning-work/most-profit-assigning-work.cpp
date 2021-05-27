@@ -14,16 +14,32 @@ public:
             return a.second < b.second;
         });
         
-        for (int i = 0; i < worker.size(); i++) {
-            int j = 0;
-            
-            while(j < nums.size() && nums[j].second > worker[i])
+        sort(worker.begin(), worker.end(), [&](int a, int b) {
+            return a > b;
+        });
+        
+        int i = 0;
+        int j = 0;
+        
+        while (i < worker.size() && j < nums.size()) {
+            if (worker[i] < nums[j].second) {
                 j++;
-            
-            if (j == nums.size())
                 continue;
+            }
             
-            else res += nums[j].first;
+            if (j < nums.size()) {
+                res+= nums[j].first;
+                i++;
+            }
+        }
+        
+        while (i < worker.size()) {
+            if (worker[i] >= nums[j-1].second) {
+                res+=nums[j-1].first;
+                i++;
+            } else {
+                break;
+            }
         }
         return res;
     }
