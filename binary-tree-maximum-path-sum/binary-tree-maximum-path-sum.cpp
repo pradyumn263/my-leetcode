@@ -19,30 +19,14 @@ public:
     }
     
     int traverse(TreeNode* root) {
-        if (!root)
-            return 0;
-        if (!root->left && !root->right) 
-            return root->val;
+       if (!root)
+           return 0;
         
-        int left = traverse(root->left);
-        int right = traverse(root->right);
-      
-        res = max(res, root->val);
-        if (root->right && root->left) {
-            res = max(res, left);
-            res = max(res, right);
-            res = max(res, root->val + left + right);
-            return max(root->val, root->val + max(left, right));
-        } else if (root->right) {
-            res = max(res, right);
-            res = max(res, root->val + right);
-            return max(root->val, root->val + right);
-        } else {
-            res = max(res, left);
-            res = max(res, root->val + left);
-            return max(root->val, root->val + left);
-        }
-       
+        // We take max with 0, because if left or right are negative then no need to include them in any path as it will always decrease your sum
+        int left = max(traverse(root->left), 0);
+        int right = max(traverse(root->right), 0);
+        res = max(res, root->val + left + right);
+        
         return root->val + max(left, right);
     }
 };
