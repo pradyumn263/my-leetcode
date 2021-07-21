@@ -22,7 +22,7 @@ public:
             return;
         
         if (res.size() == level)
-            res.push_back({});
+            res.push_back(root->val);
         
         res[level] = root->val;
         traverse(root->left, level + 1, res);
