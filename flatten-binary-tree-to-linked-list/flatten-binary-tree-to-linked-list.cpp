@@ -11,27 +11,17 @@
  */
 class Solution {
 public:
+    TreeNode* previousNode = nullptr;
+    
     void flatten(TreeNode* root) {
-        root = traverse(root);
+        if (!root) 
+            return;
+        flatten(root->right);
+        flatten(root->left);
+    
+        root->left = nullptr;
+        root->right = previousNode;
+        previousNode = root;
     }
     
-    TreeNode* traverse(TreeNode* root) {
-        if (!root)
-            return nullptr;
-        
-        TreeNode *temp = traverse(root->left);
-        if (!temp) {
-            root->right = traverse(root->right);
-        } else {
-            while(temp && temp->right)
-                temp = temp->right;
-            temp->right = root->right;
-            root->right = root->left;
-            root->left = nullptr;
-        
-            temp->right = traverse(temp->right);
-        }    
-        return root;
-        
-    }
 };
