@@ -12,26 +12,15 @@
 class Solution {
 public:
     TreeNode* pruneTree(TreeNode* root) {
-        bool temp = false;
-        root = traverse(root, temp);
-        return root;
-    }
-    
-    TreeNode* traverse(TreeNode* root, bool &containsOne) {
-        if (!root) {
-            containsOne = false;
+        if (!root)
             return root;
-        }
         
-        bool leftContainsOne = false, rightContainsOne = false;
-        root->left = traverse(root->left, leftContainsOne);
-        root->right = traverse(root->right, rightContainsOne);
+        root->left = pruneTree(root->left);
+        root->right = pruneTree(root->right);
         
-        containsOne = leftContainsOne || rightContainsOne || (root->val == 1);
-        
-        if (!containsOne) {
+        if (!root->right && !root->left && root->val != 1)
             return nullptr;
-        }
+        
         return root;
     }
     
