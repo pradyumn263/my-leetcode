@@ -11,7 +11,7 @@ public:
     }
     
      void permutationHelper(vector<int> &nums, vector<vector<int>> &res, vector<bool> &visited, vector<int> currset) {
-        if (allVisited(visited)) {
+        if (currset.size() == nums.size()) {
             res.push_back(currset);
             return;
         }
@@ -25,13 +25,5 @@ public:
                 currset.pop_back();
             }
         }
-    }
-    
-    bool allVisited(vector<bool> &visited) {
-        for (int i = 0; i < visited.size(); i++) {
-            if (!visited[i])
-                return false;
-        }
-        return true;
     }
 };
